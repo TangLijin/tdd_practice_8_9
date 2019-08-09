@@ -44,5 +44,23 @@ public class PokerGameTest {
         Assertions.assertEquals("player1 wins", result);
     }
 
+    @Test
+    public void should_return_equals_when_call_compare_given_4H_2D_VS_4C_3C() {
+        //given
+        List<Poker> player1PokerList =new ArrayList<>();
+        player1PokerList.add(new Poker("4H"));
+        player1PokerList.add(new Poker("2D"));
+
+        List<Poker> player2PokerList =new ArrayList<>();
+        player2PokerList.add(new Poker("4C"));
+        player2PokerList.add(new Poker("3C"));
+
+        //when
+        String result = PokerGame.compareTwoPoker(player1PokerList, player2PokerList);
+
+        //then
+        Assertions.assertEquals("equals", result);
+    }
+
 
 }
