@@ -16,7 +16,7 @@ public class Poker {
     }
 
     public Poker(String poker){
-        this.value = poker.substring(0,poker.length() - 2);
+        this.value = poker.substring(0,poker.length() - 1);
         this.type = poker.charAt(poker.length() - 1);
     }
 
