@@ -37,7 +37,6 @@ public class PokerGameTest {
         player2PokerList.add(new Poker("4H"));
         player2PokerList.add(new Poker("5D"));
 
-
         //when
         String result = PokerGame.compareTwoPoker(player1PokerList, player2PokerList);
 
