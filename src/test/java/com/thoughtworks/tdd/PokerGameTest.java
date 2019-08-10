@@ -316,5 +316,28 @@ public class PokerGameTest {
         Assertions.assertEquals("player2 wins", result1);
     }
 
+    @Test
+    public void should_return_player1_wins_given_3S_4S_5S_6S_7S_VS_JS_JH_JC_JD_QS(){
+        //given
+        List<Poker> player1PokerList =new ArrayList<>();
+        player1PokerList.add(new Poker("3S"));
+        player1PokerList.add(new Poker("4S"));
+        player1PokerList.add(new Poker("5S"));
+        player1PokerList.add(new Poker("6S"));
+        player1PokerList.add(new Poker("7S"));
+
+        List<Poker> player2PokerList =new ArrayList<>();
+        player2PokerList.add(new Poker("JS"));
+        player2PokerList.add(new Poker("JH"));
+        player2PokerList.add(new Poker("JC"));
+        player2PokerList.add(new Poker("JD"));
+        player2PokerList.add(new Poker("QS"));
+        //when
+        String result1 = PokerGame.compareTwoPlayers(player1PokerList, player2PokerList);
+
+        //then
+        Assertions.assertEquals("player1 wins", result1);
+    }
+
 
 }
