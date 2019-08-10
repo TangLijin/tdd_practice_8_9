@@ -1,9 +1,6 @@
 package com.thoughtworks.tdd;
 
 public class Poker {
-
-
-
     private String value;
     private char type;
 

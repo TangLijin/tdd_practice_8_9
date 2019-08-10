@@ -23,12 +23,10 @@ public class PokerCompare {
         if(pokerList.size() <= 2){
             return pokerList.get(0).getValue().equals(pokerList.get(1).getValue());
         }else {
-            String lastEqualValue = null; //记录上一对相等的value
             for (int i = 0; i < pokerList.size() - 2; i++) {
                 if (pokerList.get(i).getValue().equals(pokerList.get(i + 1).getValue())){
                     if(pokerList.get(i + 1).getValue().equals(pokerList.get(i + 2).getValue())){
                         i++;
-                        continue;
                     } else {
                         return true;
                     }
@@ -167,6 +165,7 @@ public class PokerCompare {
             case 5:
             case 6:
             case 9:
+            case 3://直接比较最大单值
                 result = PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) ==
                         PokerGame.POKER_LIST.indexOf(pokerList2.get(pokerList2.size() - 1).getValue()) ?
                         "equals" : (PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) >
@@ -191,12 +190,6 @@ public class PokerCompare {
                             PokerGame.POKER_LIST.indexOf(getEqualValuePoker(pokerList2).getValue()) ? "player1 wins" : "player2 wins");
                 }
                 break;
-            case 3://直接比较最大单值
-                result = PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) ==
-                        PokerGame.POKER_LIST.indexOf(pokerList2.get(pokerList2.size() - 1).getValue()) ?
-                        "equals" : (PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) >
-                        PokerGame.POKER_LIST.indexOf(pokerList2.get(pokerList2.size() - 1).getValue()) ? "player1 wins" : "player2 wins");
-                break;
 
         }
         return result;
@@ -214,10 +207,7 @@ public class PokerCompare {
         } else {
             result = dealEqualRankPokerList(sortedPokerList1,sortedPokerList2,getPokerRank(sortedPokerList1));
         }
-
         return result;
     }
-
-
 
 }
