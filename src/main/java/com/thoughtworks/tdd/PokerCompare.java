@@ -84,13 +84,15 @@ public class PokerCompare {
         if(ifSameType(pokerList)){  //同花色
             rank = 6;
         }
-        if(ifExist3XAnd2Y(pokerList)){
+        if(ifExist3XAnd2Y(pokerList)){  //
             rank = 7;
         }
-        if(ifContainFourEqualValuePokers(pokerList)){
+        if(ifContainFourEqualValuePokers(pokerList)){ //4个相同值
             rank = 8;
         }
-
+        if(ifSameType(pokerList)&& ifAllContinuous(pokerList)){ //同花顺
+            rank = 9;
+        }
         return rank;
     }
 
@@ -164,6 +166,7 @@ public class PokerCompare {
             case 1: //直接比较最大元素
             case 5:
             case 6:
+            case 9:
                 result = PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) ==
                         PokerGame.POKER_LIST.indexOf(pokerList2.get(pokerList2.size() - 1).getValue()) ?
                         "equals" : (PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) >
