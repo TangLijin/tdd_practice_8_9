@@ -19,15 +19,27 @@ public class PokerCompare {
         return sortedPorkrList;
     }
 
-    public static Boolean ifContainEqualValuePoker(List<Poker> pokerList) {
-        for (int i = 0; i < pokerList.size() - 1; i++) {
-            for (int j = i + 1; j < pokerList.size(); j++) {
-                if (pokerList.get(i).getValue().equals(pokerList.get(j).getValue())) {
-                    return true;
+    public static Boolean ifContainTwoEqualValuePoker(List<Poker> pokerList) {  //只判断两个值相等的情况，三个值相等的情况不满足
+        if(pokerList.size() <= 2){
+            return pokerList.get(0).getValue().equals(pokerList.get(1).getValue());
+        }else {
+            String lastEqualValue = null; //记录上一对相等的value
+            for (int i = 0; i < pokerList.size() - 2; i++) {
+                if (pokerList.get(i).getValue().equals(pokerList.get(i + 1).getValue())){
+                    if(pokerList.get(i + 1).getValue().equals(pokerList.get(i + 2).getValue())){
+                        i++;
+                        continue;
+                    } else {
+                        return true;
+                    }
                 }
             }
+            if(pokerList.get(pokerList.size() - 2).getValue().equals(pokerList.get(pokerList.size() - 1).getValue())){
+                return true;
+            }
+            return false;
         }
-        return false;
+
     }
 
     //是否包含两对相等的牌
@@ -57,7 +69,7 @@ public class PokerCompare {
 
     public static int getPokerRank(List<Poker> pokerList) {
         int rank = 1;
-        if(ifContainEqualValuePoker(pokerList)) { //一对相同值
+        if(ifContainTwoEqualValuePoker(pokerList)) { //一对相同值
             rank = 2;
         }
         if(ifContainTwoPairEqualValuePokers(pokerList)) {//两对相同值
@@ -72,7 +84,17 @@ public class PokerCompare {
         if(ifSameType(pokerList)){  //同花色
             rank = 6;
         }
+        if(ifExist3XAnd2Y(pokerList)){
+            rank = 7;
+        }
         return rank;
+    }
+
+    private static boolean ifExist3XAnd2Y(List<Poker> pokerList) {
+        if(ifContainThreeEqualValuePokers(pokerList) && ifContainTwoEqualValuePoker(pokerList)){
+            return true;
+        }
+        return false;
     }
 
     private static boolean ifSameType(List<Poker> pokerList) {
