@@ -62,5 +62,52 @@ public class PokerGameTest {
         Assertions.assertEquals("equals", result);
     }
 
+    @Test
+    public void should_return_player2_wins_given_2H_3D_4S_JC_QS_VS_5H_6C_9H_10D_AS(){
+        //given
+        List<Poker> player1PokerList =new ArrayList<>();
+        player1PokerList.add(new Poker("2H"));
+        player1PokerList.add(new Poker("3D"));
+        player1PokerList.add(new Poker("4S"));
+        player1PokerList.add(new Poker("JC"));
+        player1PokerList.add(new Poker("QS"));
+
+        List<Poker> player2PokerList =new ArrayList<>();
+        player2PokerList.add(new Poker("5H"));
+        player2PokerList.add(new Poker("6C"));
+        player2PokerList.add(new Poker("9H"));
+        player2PokerList.add(new Poker("10D"));
+        player2PokerList.add(new Poker("AS"));
+
+        //when
+        String result = PokerGame.compareTwoPlayers(player1PokerList, player2PokerList);
+
+        //then
+        Assertions.assertEquals("player1 wins", result);
+    }
+
+    @Test
+    public void should_return_equals_given_2H_3D_4S_6C_AD_VS_5H_6C_9H_10D_AS(){
+        //given
+        List<Poker> player1PokerList =new ArrayList<>();
+        player1PokerList.add(new Poker("2H"));
+        player1PokerList.add(new Poker("3D"));
+        player1PokerList.add(new Poker("4S"));
+        player1PokerList.add(new Poker("6C"));
+        player1PokerList.add(new Poker("AD"));
+
+        List<Poker> player2PokerList =new ArrayList<>();
+        player2PokerList.add(new Poker("5H"));
+        player2PokerList.add(new Poker("6C"));
+        player2PokerList.add(new Poker("9H"));
+        player2PokerList.add(new Poker("10D"));
+        player2PokerList.add(new Poker("AS"));
+        //when
+        String result = PokerGame.compareTwoPlayers(player1PokerList, player2PokerList);
+
+        //then
+        Assertions.assertEquals("equals", result);
+    }
+
 
 }
