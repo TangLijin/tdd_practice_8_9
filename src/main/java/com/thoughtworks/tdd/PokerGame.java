@@ -1,45 +1,57 @@
 package com.thoughtworks.tdd;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class PokerGame {
 
+    //    private static final String POKER_LIST1 []= new String[]{"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+//    private static final ArrayList<String> POKER_LIST = (ArrayList<String>) Arrays.asList(POKER_LIST1);
+    private static final List<String> POKER_LIST = Arrays.asList("2","3","4","5","6","7","8","9","10","J","Q","K","A");
 
-
-    private static final String POKER_LIST []= new String[]{"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
-
-    public static String compareTwoPoker(List<Poker> pokerList1, List<Poker> pokerList2) {
-
-        String result = null;
-        if(pokerList1.size() == 1){
-            if(pokerList1.get(0).getValue().equals(pokerList2.get(0).getValue()))
-                result = "equals";
-            else {
-                result = Arrays.asList(POKER_LIST).indexOf(pokerList1.get(0).getValue()) > Arrays.asList(POKER_LIST).indexOf(pokerList2.get(0).getValue()) ? "poker1" : "poker2";
-            }
-        }else {
-            if(pokerList1.get(0).getValue().equals(pokerList1.get(1).getValue())&& pokerList2.get(0).getValue().equals(pokerList2.get(1).getValue())){
-                result = Arrays.asList(POKER_LIST).indexOf(pokerList1.get(0).getValue()) > Arrays.asList(POKER_LIST).indexOf(pokerList2.get(0).getValue()) ? "player1 wins" : "player2 wins";
-            }else if(pokerList1.get(0).getValue().equals(pokerList1.get(1).getValue())){
-                result = "player1 wins";
-            }else if(pokerList2.get(0).getValue().equals(pokerList2.get(1).getValue())){
-                result = "player2 wins";
-            }else {
-                int maxIndex1 = Arrays.asList(POKER_LIST).indexOf(pokerList1.get(0).getValue()) > Arrays.asList(POKER_LIST).indexOf(pokerList1.get(1).getValue()) ?
-                        Arrays.asList(POKER_LIST).indexOf(pokerList1.get(0).getValue()) : Arrays.asList(POKER_LIST).indexOf(pokerList1.get(1).getValue());
-                int maxIndex2 = Arrays.asList(POKER_LIST).indexOf(pokerList2.get(0).getValue()) > Arrays.asList(POKER_LIST).indexOf(pokerList2.get(1).getValue()) ?
-                        Arrays.asList(POKER_LIST).indexOf(pokerList2.get(0).getValue()) : Arrays.asList(POKER_LIST).indexOf(pokerList2.get(1).getValue());
-                if(maxIndex1 == maxIndex2){
-                    result = "equals";
-                }else{
-                    result = maxIndex1 > maxIndex2 ? "player1 wins" : "player2 wins";
+    public static List<Poker> sortPorks(List<Poker> pokerList){
+        List<Poker> sortedPorkrList = new ArrayList<>();
+        if(pokerList.size() > 1){
+            for(String pokerValue : POKER_LIST){
+                for(Poker poker : pokerList){
+                    if(poker.getValue().equals(pokerValue)){
+                        sortedPorkrList.add(poker);
+                    }
                 }
-
             }
-
         }
+        return sortedPorkrList;
+    }
+    public static String compareTwoPoker(Poker poker1, Poker poker2) {
+        return poker1.getValue().equals(poker2.getValue()) ? "equals" :
+                (POKER_LIST.indexOf(poker1.getValue()) > POKER_LIST.indexOf(poker2.getValue()) ? "poker1" : "poker2");
+    }
 
+    public static String compareTwoPokerList(List<Poker> pokerList1, List<Poker> pokerList2) {
+        String result = null;
+        List<Poker> sortedPorkrList1 = sortPorks(pokerList1);
+        List<Poker> sortedPorkrList2 = sortPorks(pokerList2);
+        if (pokerList1.get(0).getValue().equals(pokerList1.get(1).getValue()) && pokerList2.get(0).getValue().equals(pokerList2.get(1).getValue())) {
+            result = POKER_LIST.indexOf(pokerList1.get(0).getValue()) > POKER_LIST.indexOf(pokerList2.get(0).getValue()) ? "player1 wins" : "player2 wins";
+        } else if (pokerList1.get(0).getValue().equals(pokerList1.get(1).getValue())) {
+            result = "player1 wins";
+        } else if (pokerList2.get(0).getValue().equals(pokerList2.get(1).getValue())) {
+            result = "player2 wins";
+        }else{
+            result = POKER_LIST.indexOf(sortedPorkrList1.get(1).getValue()) == POKER_LIST.indexOf(sortedPorkrList2.get(1).getValue()) ?
+                    "equals" :
+                    (POKER_LIST.indexOf(sortedPorkrList1.get(1).getValue()) > POKER_LIST.indexOf(sortedPorkrList2.get(1).getValue()) ?
+                    "player1 wins" : "player2 wins");
+        }
         return result;
+    }
+
+
+    public static String compareTwoPlayers(List<Poker> pokerList1, List<Poker> pokerList2){
+        if(pokerList1.size() == 1 ){
+            return  compareTwoPoker(pokerList1.get(0),pokerList2.get(0));
+        }
+        return compareTwoPokerList(pokerList1,pokerList2);
     }
 }

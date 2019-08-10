@@ -20,7 +20,7 @@ public class PokerGameTest {
         List<Poker> player2PokerList =new ArrayList<>();
         player2PokerList.add(poker2);
         //when
-        String result = PokerGame.compareTwoPoker(player1PokerList, player2PokerList);
+        String result = PokerGame.compareTwoPlayers(player1PokerList, player2PokerList);
 
         //then
         Assertions.assertEquals("poker1", result);
@@ -38,7 +38,7 @@ public class PokerGameTest {
         player2PokerList.add(new Poker("5D"));
 
         //when
-        String result = PokerGame.compareTwoPoker(player1PokerList, player2PokerList);
+        String result = PokerGame.compareTwoPlayers(player1PokerList, player2PokerList);
 
         //then
         Assertions.assertEquals("player1 wins", result);
@@ -56,7 +56,7 @@ public class PokerGameTest {
         player2PokerList.add(new Poker("3C"));
 
         //when
-        String result = PokerGame.compareTwoPoker(player1PokerList, player2PokerList);
+        String result = PokerGame.compareTwoPlayers(player1PokerList, player2PokerList);
 
         //then
         Assertions.assertEquals("equals", result);
