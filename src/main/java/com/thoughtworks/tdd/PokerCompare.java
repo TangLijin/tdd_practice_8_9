@@ -87,7 +87,25 @@ public class PokerCompare {
         if(ifExist3XAnd2Y(pokerList)){
             rank = 7;
         }
+        if(ifContainFourEqualValuePokers(pokerList)){
+            rank = 8;
+        }
+
         return rank;
+    }
+
+    private static boolean ifContainFourEqualValuePokers(List<Poker> pokerList) {
+        if (pokerList.size() >= 4) {
+            for (int i = 0; i < pokerList.size() - 3; i++) {
+                if (pokerList.get(i).getValue().equals(pokerList.get(i + 1).getValue()) &&
+                        pokerList.get(i + 1).getValue().equals(pokerList.get(i + 2).getValue()) &&
+                                pokerList.get(i + 2).getValue().equals(pokerList.get(i + 3).getValue())
+                ) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static boolean ifExist3XAnd2Y(List<Poker> pokerList) {
@@ -145,6 +163,7 @@ public class PokerCompare {
         switch (rank) {
             case 1: //直接比较最大元素
             case 5:
+            case 6:
                 result = PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) ==
                         PokerGame.POKER_LIST.indexOf(pokerList2.get(pokerList2.size() - 1).getValue()) ?
                         "equals" : (PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) >
@@ -152,6 +171,7 @@ public class PokerCompare {
                 break;
             case 2://先比较对子，再比较最大单值
             case 4: //先比较相同的牌，再比较最大单值,和2的处理相同
+            case 8:
                 if (PokerGame.POKER_LIST.indexOf(getEqualValuePoker(pokerList1).getValue()) ==
                         PokerGame.POKER_LIST.indexOf(getEqualValuePoker(pokerList2).getValue())) {
                     if (PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) ==

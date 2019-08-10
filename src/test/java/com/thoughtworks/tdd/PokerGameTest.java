@@ -271,7 +271,7 @@ public class PokerGameTest {
     }
 
     @Test
-    public void should_return_player1_wins_given_3D_3H_3C_10D_10S_VS_6S_6H_6C_6D_8S(){
+    public void should_return_player2_wins_given_3D_3H_3C_10D_10S_VS_6S_6H_6C_6D_8S(){
         //given
         List<Poker> player1PokerList =new ArrayList<>();
         player1PokerList.add(new Poker("3D"));
@@ -294,7 +294,7 @@ public class PokerGameTest {
     }
 
     @Test
-    public void should_return_player1_wins_given_3D_3H_3C_3S_AS_VS_6S_6H_6C_6D_8S(){
+    public void should_return_player2_wins_given_3D_3H_3C_3S_AS_VS_6S_6H_6C_6D_8S(){
         //given
         List<Poker> player1PokerList =new ArrayList<>();
         player1PokerList.add(new Poker("3D"));
