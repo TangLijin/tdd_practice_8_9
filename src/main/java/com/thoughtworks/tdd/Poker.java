@@ -35,4 +35,9 @@ public class Poker {
     public void setType(char type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return this.getValue() + this.getType();
+    }
 }

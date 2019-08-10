@@ -1,50 +1,11 @@
 package com.thoughtworks.tdd;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class PokerGame {
 
-    //    private static final String POKER_LIST1 []= new String[]{"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
-//    private static final ArrayList<String> POKER_LIST = (ArrayList<String>) Arrays.asList(POKER_LIST1);
-    private static final List<String> POKER_LIST = Arrays.asList("2","3","4","5","6","7","8","9","10","J","Q","K","A");
-
-    public static List<Poker> sortPorks(List<Poker> pokerList){
-        List<Poker> sortedPorkrList = new ArrayList<>();
-        if(pokerList.size() > 1){
-            for(String pokerValue : POKER_LIST){
-                for(Poker poker : pokerList){
-                    if(poker.getValue().equals(pokerValue)){
-                        sortedPorkrList.add(poker);
-                    }
-                }
-            }
-        }
-        return sortedPorkrList;
-    }
-
-    public static Boolean ifContainEqualValuePoker(List<Poker> pokerList){
-        for(int i = 0; i < pokerList.size() - 1 ; i++){
-            for(int j = i + 1; j < pokerList.size(); j++){
-                if(pokerList.get(i).getValue().equals(pokerList.get(j).getValue())){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public static Poker getEqualValuePoker(List<Poker> pokerList){
-        for(int i = 0; i < pokerList.size() - 1 ; i++){
-            for(int j = i + 1; j < pokerList.size(); j++){
-                if(pokerList.get(i).getValue().equals(pokerList.get(j).getValue())){
-                    return pokerList.get(i);
-                }
-            }
-        }
-        return null;
-    }
+    public static final List<String> POKER_LIST = Arrays.asList("2","3","4","5","6","7","8","9","10","J","Q","K","A");
 
     public static String compareTwoPoker(Poker poker1, Poker poker2) {
         return poker1.getValue().equals(poker2.getValue()) ? "equals" :
@@ -52,27 +13,7 @@ public class PokerGame {
     }
 
     public static String compareTwoPokerList(List<Poker> pokerList1, List<Poker> pokerList2) {
-        String result = null;
-        List<Poker> sortedPorkrList1 = sortPorks(pokerList1);
-        List<Poker> sortedPorkrList2 = sortPorks(pokerList2);
-
-        if(ifContainEqualValuePoker(pokerList1) && ifContainEqualValuePoker(pokerList2)){
-            result = POKER_LIST.indexOf(getEqualValuePoker(sortedPorkrList1).getValue()) == POKER_LIST.indexOf(getEqualValuePoker(sortedPorkrList2).getValue()) ?
-                    "equals" : (POKER_LIST.indexOf(getEqualValuePoker(sortedPorkrList1).getValue()) >
-                    POKER_LIST.indexOf(getEqualValuePoker(sortedPorkrList1).getValue()) ? "player1 wins" : "player2 wins");
-            System.out.println("------------------------");
-        }else if(ifContainEqualValuePoker(pokerList1)){
-            result = "player1 wins";
-        }else if(ifContainEqualValuePoker(pokerList2)){
-            result = "player2 wins";
-        }else {
-            result = POKER_LIST.indexOf(sortedPorkrList1.get(sortedPorkrList1.size() - 1).getValue()) ==
-                    POKER_LIST.indexOf(sortedPorkrList2.get(sortedPorkrList2.size() - 1).getValue()) ?
-                    "equals" : (POKER_LIST.indexOf(sortedPorkrList1.get(sortedPorkrList1.size() - 1).getValue()) >
-                    POKER_LIST.indexOf(sortedPorkrList2.get(sortedPorkrList2.size() - 1).getValue()) ? "player1 wins" : "player2 wins");
-        }
-
-        return result;
+        return PokerCompare.compare(pokerList1,pokerList2);
     }
 
 

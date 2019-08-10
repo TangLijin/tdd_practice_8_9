@@ -178,6 +178,4 @@ public class PokerGameTest {
         Assertions.assertEquals("player1 wins", result);
     }
 
-
-
 }
