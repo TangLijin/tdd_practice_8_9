@@ -66,25 +66,27 @@ public class PokerCompare {
         if(ifContainThreeEqualValuePokers(pokerList)){
             rank = 4;
         }
-//        if(ifAllContinuous(pokerList)){
-//            rank = 5;
-//        }
+        if(ifAllContinuous(pokerList)){
+            rank = 5;
+        }
 
         return rank;
     }
 
-//    private static boolean ifAllContinuous(List<Poker> pokerList) {
-//        List<Integer> indexList = new ArrayList<>();
-//        for (Poker poker : pokerList){
-//            indexList.add(PokerGame.POKER_LIST.indexOf(poker.getValue()));
-//        }
-//        for(int i = 0; i < indexList.size() - 1; i++){
-//            if(indexList.get(i + 1) - indexList.get(i) != 1){
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+    private static boolean ifAllContinuous(List<Poker> pokerList) {
+        if(pokerList.size() < 3 )
+            return false;
+        List<Integer> indexList = new ArrayList<>();
+        for (Poker poker : pokerList){
+            indexList.add(PokerGame.POKER_LIST.indexOf(poker.getValue()));
+        }
+        for(int i = 0; i < indexList.size() - 1; i++){
+            if(indexList.get(i + 1) - indexList.get(i) != 1){
+                return false;
+            }
+        }
+        return true;
+    }
 
     private static boolean ifContainThreeEqualValuePokers(List<Poker> pokerList) {
         if (pokerList.size() >= 3) {
