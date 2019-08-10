@@ -83,7 +83,7 @@ public class PokerGameTest {
         String result = PokerGame.compareTwoPlayers(player1PokerList, player2PokerList);
 
         //then
-        Assertions.assertEquals("player1 wins", result);
+        Assertions.assertEquals("player2 wins", result);
     }
 
     @Test
