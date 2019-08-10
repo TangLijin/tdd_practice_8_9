@@ -57,20 +57,37 @@ public class PokerCompare {
 
     public static int getPokerRank(List<Poker> pokerList) {
         int rank = 1;
-        if(ifContainEqualValuePoker(pokerList)) {
+        if(ifContainEqualValuePoker(pokerList)) { //一对相同值
             rank = 2;
         }
-        if(ifContainTwoPairEqualValuePokers(pokerList)) {
+        if(ifContainTwoPairEqualValuePokers(pokerList)) {//两对相同值
             rank = 3;
         }
-        if(ifContainThreeEqualValuePokers(pokerList)){
+        if(ifContainThreeEqualValuePokers(pokerList)){ //3个相同值
             rank = 4;
         }
-        if(ifAllContinuous(pokerList)){
+        if(ifAllContinuous(pokerList)){ //普通顺子
             rank = 5;
         }
-
+        if(ifSameType(pokerList)){  //同花色
+            rank = 6;
+        }
         return rank;
+    }
+
+    private static boolean ifSameType(List<Poker> pokerList) {
+        if(pokerList.size() < 3 )
+            return false;
+        List<Character> typeList = new ArrayList<>();
+        for (Poker poker : pokerList){
+            typeList.add(poker.getType());
+        }
+        for(int i = 0; i < typeList.size() - 1; i++){
+            if(typeList.get(i + 1) != typeList.get(i) ){
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean ifAllContinuous(List<Poker> pokerList) {
@@ -105,6 +122,7 @@ public class PokerCompare {
         String result = null;
         switch (rank) {
             case 1: //直接比较最大元素
+            case 5:
                 result = PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) ==
                         PokerGame.POKER_LIST.indexOf(pokerList2.get(pokerList2.size() - 1).getValue()) ?
                         "equals" : (PokerGame.POKER_LIST.indexOf(pokerList1.get(pokerList1.size() - 1).getValue()) >
