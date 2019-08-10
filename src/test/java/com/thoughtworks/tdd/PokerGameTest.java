@@ -133,7 +133,7 @@ public class PokerGameTest {
     }
 
     @Test
-    public void should_return_player2_wins_given_3H_3D_4S_6C_KD_VS_2H_2C_9H_10D_AS(){
+    public void should_return_player2_wins_given_3H_3D_4S_6C_KD_VS_2H_2C_9H_10D_AS (){
         //given
         List<Poker> player1PokerList =new ArrayList<>();
         player1PokerList.add(new Poker("2H"));
